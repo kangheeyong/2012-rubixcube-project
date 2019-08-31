@@ -7,12 +7,13 @@
 #include "Cube_MySQL.h"
 #include "My_usart.h"
 #include <windows.h>   // Sleep(3500);  약 3.5초 딜레이
-#include <conio.h>   
+#include <conio.h>  
+#include "My_cube_source.h"
 //#include <highgui.h>
 
 
 
-
+/*
 #define CUBE_R			rotation_10(pC)
 #define CUBE_R_			rotation_12(pC)
 #define CUBE_R2			rotation_11(pC)
@@ -38,7 +39,7 @@
 #define CUBE_D2			rotation_5(pC)
 
 #define X_Z				rotation_19(pC)
-#define X_Y				rotation_20(pC)
+#define X_Y				rotation_20(pC)*/
 
 typedef struct _ARM_ALGORITHM_DATA
 {
@@ -82,7 +83,7 @@ char *mysql_p;
 
 char query_surch[200] = "select data from ";
 
-
+/*
 void trans_int_char(int *ip,char *chp)
 {
 	for(int i = 0 ; i < 54 ; i++)
@@ -146,7 +147,7 @@ void quert_data_surch(char *p,int n,char *pp)
 	for(j = i ; pp[j-i] != NULL ; j++) p[j] = pp[j-i];
 	p[j++]= '\'';
 	p[j++]= NULL;
-}
+}*/
 void a()
 {
 	Cube[0][4] = 2; //빨강
@@ -210,15 +211,11 @@ void a()
 	Cube[5][7] = 6;
 	Cube[5][8] = 2;
 
-}
+}/*
 void cube_tr_mod_1(int *p ,int *cp)
 {
 	for(int i = 0 ; i < 54 ; i++) cp[i] = p[i]%5;
-/*	for(int i = 0 ; i < 6 ; i++)
-	{
-		cp[9*i] = cp[9*i+2] = cp[9*i+6] = cp[9*i+8] = 0;
-	}
-*/
+
 	if(cp[9*1+0] == 1) cp[9*0+6] = cp[9*5+2] = 0;
 	else if(cp[9*5+2] == 1) cp[9*0+6] = cp[9*1+0] = 0;
 	else if(cp[9*0+6] == 1) cp[9*5+2] = cp[9*1+0] = 0;
@@ -486,7 +483,8 @@ void rotation_restoration(int *p,int n)
 		while((p[i] = Z_X_rotation_restoration(p[i])) != 0 ) i++;
 	
 	}
-}
+}*/
+/*
 void rotation_tr(int m)
 {
 	int i = 0;
@@ -1377,25 +1375,6 @@ void cube_solution()
 	printf("\n탐색시작!!!\n");
 	//c1.X_Z;
 	//c1.X_Z;
-	
-		
-	c1.CUBE_D_;
-	c1.CUBE_U2;
-	c1.CUBE_F_;
-	c1.CUBE_D_;
-	c1.CUBE_U2;
-
-	c1.CUBE_F_;
-	c1.CUBE_U;
-
-		c1.CUBE_D_;
-	c1.CUBE_U2;
-	c1.CUBE_F_;
-	c1.CUBE_D_;
-	c1.CUBE_U2;
-
-	c1.CUBE_F_;
-	c1.CUBE_U;
 
 	
 	trans_int_int(Cube[0],copy_Cube[0]);
@@ -1445,6 +1424,7 @@ void cube_solution()
 
 	//m1.MySQL_Close(); //DB종료
 }
+*/
 
 //------------------------------------
 void Data_Tr_Arm(void)
@@ -1817,7 +1797,7 @@ void robot_rotstion(int data,int time)
 	}
 	
 }
-void Replace_(int *p)
+/*void Replace_(int *p)
 {
 	int i;
 
@@ -1848,7 +1828,7 @@ void Replace_(int *p)
 		if(p[i] == 26) printf("|Y_X| ");
 	}
 	printf("\n\n");
-}
+}*/
 void Transform_ARM_ver(int *p)
 { 
 	// U -> F
@@ -2025,12 +2005,15 @@ void second_()
 //	cam_copy();
 	cube_JK.camera_off();
 
+
+	
 }
 
 void trans__(int j)
 {
 	int colar;
-	int num[6] = {2,6,7,1,3,8};
+	//int num[6] = {2,6,7,1,3,8};
+	int num[6] = {0,1,2,3,4,5};
 	int *p = Cube[0];
 
 	colar = Cube[j][4];
@@ -2047,10 +2030,10 @@ void third_()
 {
 	for(int i = 0 ; i < 6 ; i++) trans__(i);
 
-	cube_solution();
-	Replace_(Gotnum_data);
-	Transform_ARM_ver(Gotnum_data);
-	Replace_(Gotnum_data);
+	//cube_solution();
+//	Replace_(Gotnum_data);
+	//Transform_ARM_ver(Gotnum_data);
+	//Replace_(Gotnum_data);
 }
 void last_()
 {
@@ -2059,7 +2042,7 @@ void last_()
 	Data_Tr_Arm();
 
 	Sleep(1000);
-	//system("cls");
+	system("cls");
 	deep = 0;
 	twin = 0;
 	deep_max = 0;
@@ -2090,28 +2073,52 @@ void main(void)
 {
 	int s = 0;
 
-	//u1.usart_open();
+	u1.usart_open();
 
 	arm.LR_01 = LR + R90 + L90; 
 	arm.For_Back_ward_11 = For_Back_ward + Width_out + Height_length_out;
 	arm.BF_10 = BF + F90 + B90;
 	Data_Tr_Arm();
 
-	m1.MySQL_Connect(); //DB접속
+	//m1.MySQL_Connect(); //DB접속
 
 
 	//char a;
 	while(1)      
 	{
 	
-		a(); // 가상 큐브 모양
+		//a(); // 가상 큐브 모양
 
 
 		first_(); //초기 입력
 		system("cls");
-		//second_(); //영상 받는부분
-		third_(); //큐브 탐색
+
 		
+		
+
+		second_(); //영상 받는부분
+		//third_(); //큐브 탐색
+		
+		for(int i = 0 ; i < 6 ; i++)
+	{
+		for(int j = 0 ; j < 9 ; j++)
+		CUBE_DATA.cube[i][j] = Cube[i][j];
+	}
+
+
+	CUBE_MAIN();
+	CubeData_print(&CUBE_DATA);
+
+	Replace_(ARM_Transform);
+
+	while(ARM_Transform[s] != 0)
+		{
+			printf("회전수 : %2d  d%%\n",s+1);
+
+			robot_rotstion(ARM_Transform[s++],650);		
+		}
+
+
 		//system("cls");
 /*
 		while(Gotnum_data[s] != 0)
@@ -2121,7 +2128,7 @@ void main(void)
 		}
 	*/	
 		s = 0;		
-		//last_();
+		last_();
 	//	scanf("%d",&a);
 	//	u1.usart_send(a);
 	} 
